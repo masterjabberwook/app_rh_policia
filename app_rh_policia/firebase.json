@@ -1,1 +1,25 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"rh-po-fa61a","appId":"1:672503713207:android:068c36786d43db2569ec32","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"rh-po-fa61a","configurations":{"android":"1:672503713207:android:068c36786d43db2569ec32","web":"1:672503713207:web:6a5a9f182ccfcb7469ec32"}}}}}}
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "rh-policias2",
+          "appId": "1:297439273578:android:7119403c22c813e5432013",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "rh-policias2",
+          "configurations": {
+            "android": "1:297439273578:android:7119403c22c813e5432013",
+            "web": "1:297439273578:web:08543c31cc2b497b432013"
+          }
+        }
+      }
+    }
+  }
+}

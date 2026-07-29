@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Demo without Firebase Authentication. These collections remain writable
+    // by app clients so operational data can be synchronized in real time.
+    match /officers/{officerId} {
+      allow read, write: if true;
+    }
+
+    match /patrols/{patrolId} {
+      allow read, write: if true;
+    }
+
+    match /crimes/{crimeId} {
+      allow read, write: if true;
+    }
+
+    match /events/{eventId} {
+      allow read, write: if true;
+    }
+
+    // Deny access to every other collection.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

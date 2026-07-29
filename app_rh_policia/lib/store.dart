@@ -603,7 +603,7 @@ class AppStore extends ChangeNotifier {
     // 3. Registrar evento
     _log(DutyEvent(
       time: DateTime.now(), officerName: o.nombre, type: EventType.entrada,
-      detalle: 'Entró a servicio · Unidad ${o.unidad} · selfie verificada',
+      detalle: 'Entro a servicio · Unidad ${o.unidad} · registro operativo confirmado',
       cuadrante: cuadranteOf(o.cuadranteId).nombre,
     ));
   }

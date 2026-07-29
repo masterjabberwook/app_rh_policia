@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 import 'models.dart';
 import 'store.dart';
@@ -503,15 +501,15 @@ class _Instructions extends StatefulWidget {
 }
 
 class _InstructionsState extends State<_Instructions> {
-  String? imagePath;
   bool gpsShared = true;
+  bool operationalCheckConfirmed = false;
 
   @override
   Widget build(BuildContext context) {
     final steps = [
       ('1', 'Baja de tu unidad', 'Estaciona y desciende de ${widget.me.unidad}.', Icons.directions_car),
-      ('2', 'Toma tu selfie de inicio', 'Debe verse el número de patrulla y el cuadrante al fondo.', Icons.camera_alt),
-      ('3', 'Mantén tu localización activa', 'No cierres la app; tu posición se comparte en vivo.', Icons.my_location),
+      ('2', 'Confirma tu inicio operativo', 'Valida que estas en tu unidad y dentro del cuadrante asignado.', Icons.verified_user),
+      ('3', 'Manten tu localizacion activa', 'No cierres la app; tu posicion se comparte en vivo.', Icons.my_location),
     ];
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
@@ -561,13 +559,19 @@ class _InstructionsState extends State<_Instructions> {
                     ),
                   )),
               const SizedBox(height: 4),
-              _SelfieCapture(
-                me: widget.me,
-                cu: widget.cu,
-                imagePath: imagePath,
-                onTaken: (path) => setState(() => imagePath = path),
+              CheckboxListTile(
+                value: operationalCheckConfirmed,
+                onChanged: (v) => setState(() => operationalCheckConfirmed = v ?? false),
+                activeColor: AppColors.success,
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Confirmo mi inicio operativo'),
+                subtitle: const Text(
+                  'No se capturan ni almacenan imagenes.',
+                  style: TextStyle(color: AppColors.textDim, fontSize: 12),
+                ),
+                secondary: const Icon(Icons.assignment_turned_in, color: AppColors.guinda),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 6),
               SwitchListTile(
                 value: gpsShared,
                 onChanged: (v) => setState(() => gpsShared = v),
@@ -578,7 +582,7 @@ class _InstructionsState extends State<_Instructions> {
               ),
               const SizedBox(height: 8),
               FilledButton.icon(
-                onPressed: (imagePath != null && gpsShared) ? widget.onActivate : null,
+                onPressed: (operationalCheckConfirmed && gpsShared) ? widget.onActivate : null,
                 style: FilledButton.styleFrom(
                   backgroundColor: AppColors.success,
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -595,6 +599,7 @@ class _InstructionsState extends State<_Instructions> {
   }
 }
 
+/* Legacy local image-capture flow. Images are intentionally not used or stored.
 class _SelfieCapture extends StatefulWidget {
   final Officer me;
   final Cuadrante cu;
@@ -848,6 +853,7 @@ class _SelfieCaptureState extends State<_SelfieCapture> with SingleTickerProvide
       );
 }
 
+*/
 // ----------------- Servicio activo -----------------
 class _Active extends StatelessWidget {
   final Officer me;
